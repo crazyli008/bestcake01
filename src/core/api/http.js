@@ -1,5 +1,4 @@
 import axios from "axios";
-console.log(process.env);
 // 默认全局axios请求对象基本配置
 const config = {
   baseURL: process.env.VUE_APP_BASE_API,

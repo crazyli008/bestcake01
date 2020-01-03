@@ -8,6 +8,8 @@ import { Icon } from "vant";
 import Swiper from "./swiper";
 // 引入NoticeBar 通知栏
 import { NoticeBar } from "vant";
+// 引入标签栏
+import { Tab, Tabs } from "vant";
 export default function(Vue) {
   // 底部导航条组件
   Vue.use(Tabbar).use(TabbarItem);
@@ -19,4 +21,6 @@ export default function(Vue) {
   Vue.component("Swiper", Swiper);
   // 将NoticeBar注册全局
   Vue.use(NoticeBar);
+  // 将标签栏注册全局
+  Vue.use(Tab).use(Tabs);
 }

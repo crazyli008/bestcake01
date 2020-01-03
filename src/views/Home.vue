@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="footer">
-      <van-tabbar v-model="active">
+      <van-tabbar
+        v-model="active"
+        @change="setToPath"
+        active-color="#1fb1b8"
+        :z-index="999"
+      >
         <van-tabbar-item
           :icon="item.ico"
-          :to="item.path"
           v-for="(item, index) in list"
           :key="index"
           >{{ item.title }}</van-tabbar-item
@@ -26,13 +30,17 @@ export default {
         { title: "我的", path: "/my", ico: "manager" }
       ]
     };
+  },
+  beforeMount() {
+    this.active = this.list.findIndex(item => {
+      return item.path === this.$route.path; // 返回达成条件的索引
+    });
+  },
+  methods: {
+    setToPath(active) {
+      this.active = active;
+      this.$router.push(this.list[this.active].path);
+    }
   }
 };
 </script>
-<style lang="scss" scoped>
-#tabbar {
-  .van-tabbar--fixed {
-    z-index: 1000 !important;
-  }
-}
-</style>
