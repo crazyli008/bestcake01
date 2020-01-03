@@ -39,6 +39,7 @@ const routes = [
         }
       }
     ],
+    // 默认显示首页
     redirect: "/index"
   }
 ];

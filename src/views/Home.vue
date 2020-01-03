@@ -20,12 +20,19 @@ export default {
     return {
       active: 0,
       list: [
-        { title: "首页", path: "/index", ico: "wap-home-o" },
+        { title: "首页", path: "/index", ico: "wap-home" },
         { title: "分类", path: "/class", ico: "qr" },
-        { title: "购物车", path: "/cart", ico: "shopping-cart-o" },
-        { title: "我的", path: "/my", ico: "contact" }
+        { title: "购物车", path: "/cart", ico: "shopping-cart" },
+        { title: "我的", path: "/my", ico: "manager" }
       ]
     };
   }
 };
 </script>
+<style lang="scss" scoped>
+#tabbar {
+  .van-tabbar--fixed {
+    z-index: 1000 !important;
+  }
+}
+</style>
