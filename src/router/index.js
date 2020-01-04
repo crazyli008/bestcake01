@@ -37,6 +37,14 @@ const routes = [
         meta: {
           title: "我的"
         }
+      },
+      {
+        //部署详情页路由
+        path: "show",
+        component: () => import("@/components/main/show.vue"),
+        meta: {
+          title: "show"
+        }
       }
     ],
     // 默认显示首页

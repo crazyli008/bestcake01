@@ -8,7 +8,7 @@ const config = {
   transformRequest: [
     function(data) {
       // 对 data 进行任意转换处理
-      console.log(data);
+      // console.log(data);
       return data;
     }
   ],
@@ -16,7 +16,7 @@ const config = {
   transformResponse: [
     function(data) {
       // 对 data 进行任意转换处理
-      console.log(data);
+      // console.log(data);
       return data;
     }
   ]

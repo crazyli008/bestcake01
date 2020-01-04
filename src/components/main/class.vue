@@ -18,7 +18,8 @@
             v-for="(item, index) in goodList.list"
             :key="index"
           >
-            <img :src="item.ImgUrl" alt />
+            <!-- 遍历图片时将跳转详情页的方法绑定在图片上，点击图片跳转详情页，并将该产品的信息传过去 -->
+            <img :src="item.ImgUrl" @click="toPath(item)" />
             <p>{{ item.Name }}</p>
             <p>{{ item.Means | subStr(13) }}</p>
             <div class="left">
@@ -125,6 +126,14 @@ export default {
       } else if (item.SupplyNo.indexOf("RP") !== -1) {
         return url + "/rp/" + item.Name + ".jpg";
       }
+    },
+    toPath(item) {
+      // 路由跳转用router，path，对应query
+      this.$router.push({
+        path: "/show",
+        // 参数是货号和商品名称，因为点击详情的时候根据货号来判断用哪个接口，传入名称是为了辨别商品，和第一个接口需要Name
+        query: { Name: item.Name, SupplyNo: item.SupplyNo }
+      });
     }
   }
 };

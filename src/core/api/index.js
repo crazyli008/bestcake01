@@ -24,5 +24,19 @@ const Apis = class {
       }
     });
   }
+  getShowDataOne(data) {
+    // 女神和乳品的调接口的方式 抓取回来的数据，除了vcm还有Nmae，m不是固定了，需要动态传
+    //获取详情页数据，知道要传参数        Name: data.Name, c: "NsCakeCenter", m: data.m,v: Date.now()  http://m.bestcake.com/json1811.ashx?Name=%E4%B8%80%E8%A7%81%E5%80%BE%E5%BF%83&c=NsCakeCenter&m=GetNSCakeByName&v=1578127197501
+    return request({
+      method: "GET",
+      url: "/json1811.ashx",
+      params: {
+        Name: data.Name,
+        c: "NsCakeCenter",
+        m: data.m,
+        v: Date.now()
+      }
+    });
+  }
 };
 export default new Apis();
