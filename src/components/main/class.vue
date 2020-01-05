@@ -128,7 +128,7 @@ export default {
       }
     },
     toPath(item) {
-      // 路由跳转用router，path，对应query
+      // 路由跳转用router，path，对应query，同时携带参数
       this.$router.push({
         path: "/show",
         // 参数是货号和商品名称，因为点击详情的时候根据货号来判断用哪个接口，传入名称是为了辨别商品，和第一个接口需要Name

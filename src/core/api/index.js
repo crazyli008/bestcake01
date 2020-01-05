@@ -38,5 +38,19 @@ const Apis = class {
       }
     });
   }
+  getShowDataTwo(data) {
+    // 经典和伴手礼，又是另一种的传参方式，需要传一个城市名，proName
+    return request({
+      method: "GET",
+      url: "/json1811.ashx",
+      params: {
+        City: data.City,
+        ProName: data.ProName,
+        c: data.c,
+        m: data.m,
+        v: Date.now()
+      }
+    });
+  }
 };
 export default new Apis();

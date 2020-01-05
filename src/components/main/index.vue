@@ -16,9 +16,7 @@
           v-for="(item, index) in SwiperBannerList"
           :key="index"
         >
-          <a href>
-            <img :src="item.ImgUrl" />
-          </a>
+          <img :src="item.ImgUrl" />
         </div>
       </Swiper>
     </div>
@@ -62,9 +60,7 @@
       <div v-for="(item, index) in SaleList" :key="index">
         <!-- 长条 -->
         <div class="tab">
-          <a href>
-            <img :src="item.TabImgUrl" />
-          </a>
+          <img :src="item.TabImgUrl" />
         </div>
         <!-- 横滑轮播  -->
         <div class="slider-land1">
