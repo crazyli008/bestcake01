@@ -1,11 +1,13 @@
 <template>
   <div>
     <div class="footer">
+      <!-- 获取路径$route.path -->
       <van-tabbar
         v-model="active"
         @change="setToPath"
         active-color="#1fb1b8"
         :z-index="999"
+        v-show="$route.path !== '/show'"
       >
         <van-tabbar-item
           :icon="item.ico"

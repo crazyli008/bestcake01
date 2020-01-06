@@ -11,11 +11,7 @@
       <!-- 配置全局轮播插件 -->
       <Swiper id="banner" :config="bannerConfig">
         <!-- 运用插槽 -->
-        <div
-          class="swiper-slide"
-          v-for="(item, index) in SwiperBannerList"
-          :key="index"
-        >
+        <div class="swiper-slide" v-for="(item, index) in SwiperBannerList" :key="index">
           <img :src="item.ImgUrl" />
         </div>
       </Swiper>
@@ -43,14 +39,10 @@
       </div>
       <van-notice-bar class="noticelist" :text="NoticeList" />
     </div>
-    <!--  -->
+    <!-- 中间内容 -->
     <div class="centercontent">
       <van-row>
-        <van-col
-          span="12"
-          v-for="(item, index) in CenterContentList"
-          :key="index"
-        >
+        <van-col span="12" v-for="(item, index) in CenterContentList" :key="index">
           <img :src="item.ImgUrl" alt />
         </van-col>
       </van-row>
@@ -65,11 +57,7 @@
         <!-- 横滑轮播  -->
         <div class="slider-land1">
           <Swiper :id="'slider' + index" :config="sliderConfig">
-            <div
-              class="swiper-slide"
-              v-for="(value, idx) in item.CakeList"
-              :key="idx"
-            >
+            <div class="swiper-slide" v-for="(value, idx) in item.CakeList" :key="idx">
               <div class="slider_item">
                 <a href>
                   <img :src="value.ImgUrl" alt />
@@ -118,6 +106,7 @@ export default {
       var mainresult = res.data.Tag.mainresult;
       console.log(mainresult); //打印回来的数据，在SwiperBannerList有对应的图片地址，然后返回的数据放在本组件的bannerlist中
       this.SwiperBannerList = mainresult.SwiperBannerList;
+      // 活动的数据没有了，先注销，有活动再改回来
       this.activityUrl = mainresult.AbsoluteBannerList[0].ImgUrl;
       this.TopIconList = mainresult.TopIconList;
       this.NoticeList += mainresult.NoticeList;
