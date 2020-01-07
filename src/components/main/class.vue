@@ -26,7 +26,8 @@
               <span>{{ "￥" + item.CurrentPrice }}</span>
               <span>{{ ("/" + item.LabelText) | subStr(11) }}</span>
             </div>
-            <van-icon class="right" name="shopping-cart-o" />
+            <!-- 购物车图标添加点击事件 -->
+            <van-icon class="right" name="shopping-cart-o" @click="add(item)" />
           </van-col>
         </van-row>
       </van-tab>
@@ -134,6 +135,21 @@ export default {
         // 参数是货号和商品名称，因为点击详情的时候根据货号来判断用哪个接口，传入名称是为了辨别商品，和第一个接口需要Name
         query: { Name: item.Name, SupplyNo: item.SupplyNo }
       });
+    },
+    add(item) {
+      var temp = {
+        id: item.ID,
+        ImgUrl: item.ImgUrl,
+        Size: item.Size,
+        CurrentPrice: item.CurrentPrice,
+        num: 1,
+        Name: item.Name,
+        bool: true
+      };
+      // 测试数据是否拿到
+      // console.log(temp);
+      // 点击购买后将数据添加到vuex中，点击的默认数量和size是该接口发的数据
+      this.$store.commit("add", temp);
     }
   }
 };

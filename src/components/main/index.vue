@@ -11,7 +11,11 @@
       <!-- 配置全局轮播插件 -->
       <Swiper id="banner" :config="bannerConfig">
         <!-- 运用插槽 -->
-        <div class="swiper-slide" v-for="(item, index) in SwiperBannerList" :key="index">
+        <div
+          class="swiper-slide"
+          v-for="(item, index) in SwiperBannerList"
+          :key="index"
+        >
           <img :src="item.ImgUrl" />
         </div>
       </Swiper>
@@ -42,7 +46,11 @@
     <!-- 中间内容 -->
     <div class="centercontent">
       <van-row>
-        <van-col span="12" v-for="(item, index) in CenterContentList" :key="index">
+        <van-col
+          span="12"
+          v-for="(item, index) in CenterContentList"
+          :key="index"
+        >
           <img :src="item.ImgUrl" alt />
         </van-col>
       </van-row>
@@ -57,7 +65,11 @@
         <!-- 横滑轮播  -->
         <div class="slider-land1">
           <Swiper :id="'slider' + index" :config="sliderConfig">
-            <div class="swiper-slide" v-for="(value, idx) in item.CakeList" :key="idx">
+            <div
+              class="swiper-slide"
+              v-for="(value, idx) in item.CakeList"
+              :key="idx"
+            >
               <div class="slider_item">
                 <a href>
                   <img :src="value.ImgUrl" alt />

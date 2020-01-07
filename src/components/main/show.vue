@@ -62,7 +62,12 @@
     <!-- 商品尺寸 -->
     <div class="size">
       <div class="size-top">
-        <div v-for="(item, index) in sizeList" :key="index">
+        <div
+          v-for="(item, index) in sizeList"
+          :key="index"
+          :style="'background:' + (active === index ? '#02d3d6' : '')"
+          @click="select(index)"
+        >
           {{ item.Size }}
         </div>
       </div>
@@ -130,10 +135,10 @@
     <!-- 购买按钮 -->
     <div class="buy1">
       <div>
-        lalala
-        <br />lalal
+        {{ (currentdata.CurrentPrice || 0) * num + ".00" }}
       </div>
-      <div>加入购物车</div>
+      <!-- 加入购物车添加点击事件 -->
+      <div @click="addCart">加入购物车</div>
       <div>立即购买</div>
     </div>
     <!-- 垫层 -->
@@ -142,6 +147,8 @@
 </template>
 
 <script>
+// 引入提示框，用于加入购物车，让客户点击确认还是取消
+import { Dialog } from "vant";
 export default {
   data() {
     return {
@@ -157,7 +164,9 @@ export default {
       sizeList: [],
       goodInfo: {},
       Sweet: "https://res.bestcake.com/m-images/ww/jz/tiandu_",
-      num: 1
+      num: 1,
+      active: 0,
+      currentdata: {}
     };
   },
   mounted() {
@@ -228,19 +237,66 @@ export default {
           this.sizeList = result.infos.CakeType; //蛋糕size
           this.goodInfo = result.infos; //蛋糕信息
         }
-        console.log(this.sizeList);
-        console.log(this.goodInfo);
-        // this.select(0);
+        // 测试尺寸列表是否赋值成功
+        // console.log(this.sizeList);
+        // 测试商品信息是否赋值成功
+        // console.log(this.goodInfo);
+        // 初始化的时候默认选中第一个，并将数据赋值上
+        this.select(0);
       });
     },
     add(bool) {
+      // 让数量加减逻辑
       // + -可以复用的方法，传过来布尔值，如果是true的话，数量+1，如果是false的话数量减1
       if (bool) {
         this.num += 1;
       } else {
         this.num--;
+        // 减到一不再减下去
         this.num = this.num <= 1 ? 1 : this.num;
       }
+    },
+    select(index) {
+      // 选中逻辑
+      // 将点击的下标传给active，让其显示，点击时的状态
+      this.active = index;
+      // 将尺寸数组，用当前选中的下标来选择，赋值给当前的数据，因为不同的尺寸价钱不一样
+      this.currentdata = this.sizeList[this.active];
+    },
+    addCart() {
+      // 加入购物车逻辑
+      // 测试选中后，当前的数据，是否发生变化
+      // console.log(this.currentdata);
+      var temp = {
+        // id需要做一个兼容，因为，女神和乳品的id是currentdata.ID，经典和伴手礼是currentdata.Id
+        id: this.currentdata.ID || this.currentdata.Id,
+        // 传第一张图片
+        ImgUrl: this.ImgUrl + "1.jpg",
+        // 传对应的尺寸
+        Size: this.currentdata.Size,
+        // 对应的价格
+        CurrentPrice: this.currentdata.CurrentPrice,
+        // 对应的数量
+        num: this.num,
+        // 对应的名字
+        Name: this.goodInfo.Name,
+        // 数据中加上bool值，为了在购物车中做全选和不全选的操作，默认都是被选中状态
+        bool: true
+      };
+      Dialog.confirm({
+        title: "提示",
+        message: "是否加入购物车"
+      })
+        // 确认执行的逻辑
+        .then(() => {
+          // 如果客户点击确认了，就执行vuex里面的加入购物车的方法，同时将参数带过去，方便在购物车里取到
+          this.$store.commit("add", temp);
+          this.$router.push("/cart");
+        })
+        // 取消执行的逻辑
+        .catch(() => {
+          // on cancel
+        });
     }
   }
 };
@@ -542,6 +598,9 @@ export default {
       width: 135px;
       height: 100%;
       padding-left: 15px;
+      font-size: 17px;
+      color: #f2495e;
+      font-weight: bold;
     }
     div:nth-child(2) {
       float: left;
