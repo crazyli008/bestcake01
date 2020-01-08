@@ -50,6 +50,8 @@
 </template>
 
 <script>
+// 引入Toast轻提示，跳转到详情页中加载数据用
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -129,6 +131,11 @@ export default {
       }
     },
     toPath(item) {
+      Toast.loading({
+        message: "加载中...",
+        duration: 1500,
+        forbidClick: true
+      });
       // 路由跳转用router，path，对应query，同时携带参数
       this.$router.push({
         path: "/show",
@@ -146,6 +153,7 @@ export default {
         Name: item.Name,
         bool: true
       };
+      Toast.success(item.Name + "\n" + "已加入购物车");
       // 测试数据是否拿到
       // console.log(temp);
       // 点击购买后将数据添加到vuex中，点击的默认数量和size是该接口发的数据

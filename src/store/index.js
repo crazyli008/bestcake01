@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     City: "上海",
     // vuex怕刷新，在初始化时，将localStorage中数据取回来
-    cartList: Store.get("cartList") || []
+    cartList: Store.get("cartList") || [],
+    userInfo: {}
   },
   mutations: {
     // 加入购物车的方法

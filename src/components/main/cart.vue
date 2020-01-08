@@ -63,7 +63,7 @@
           @click="selectAll"
         />
         <span>全选</span>
-        <span>清空</span>
+        <span @click="clear">清空</span>
       </div>
       <div class="countall">
         <span>合计:</span>
@@ -90,6 +90,12 @@ export default {
     console.log(this.cartList);
   },
   methods: {
+    clear() {
+      // 清空购物车
+      this.cartList.splice(0);
+      // 同时更新localStorage
+      Store.set("cartList", this.$store.state.cartList);
+    },
     add(item) {
       // 加的点击事件
       item.num++;

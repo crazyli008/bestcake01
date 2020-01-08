@@ -50,6 +50,7 @@
           span="12"
           v-for="(item, index) in CenterContentList"
           :key="index"
+          @click="toshow(item)"
         >
           <img :src="item.ImgUrl" alt />
         </van-col>
@@ -71,14 +72,12 @@
               :key="idx"
             >
               <div class="slider_item">
-                <a href>
-                  <img :src="value.ImgUrl" alt />
-                  <p>{{ value.Name }}</p>
-                  <p>
-                    <span>{{ "￥" + value.Price }}</span>
-                    <span>{{ " / " + value.Size }}</span>
-                  </p>
-                </a>
+                <img :src="value.ImgUrl" alt @click="toshow(value)" />
+                <p>{{ value.Name }}</p>
+                <p>
+                  <span>{{ "￥" + value.Price }}</span>
+                  <span>{{ " / " + value.Size }}</span>
+                </p>
               </div>
             </div>
           </Swiper>
@@ -91,6 +90,8 @@
 </template>
 
 <script>
+// 引入Toast轻提示，跳转到详情页中加载数据用
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -147,6 +148,20 @@ export default {
       } else if (item.SupplyNo.indexOf("RP") !== -1) {
         return url + "/rp/" + item.Name + ".jpg";
       }
+    },
+    toshow(item) {
+      Toast.loading({
+        message: "加载中...",
+        // 显示时间1.5s
+        duration: 1500,
+        forbidClick: true
+      });
+      // 路由跳转用router，path，对应query，同时携带参数
+      this.$router.push({
+        path: "/show",
+        // 参数是货号和商品名称，因为点击详情的时候根据货号来判断用哪个接口，传入名称是为了辨别商品，和第一个接口需要Name
+        query: { Name: item.Name, SupplyNo: item.SupplyNo }
+      });
     }
   }
 };
@@ -272,31 +287,28 @@ export default {
         height: 190px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         text-align: center;
-        a {
-          color: #333;
-          img {
-            width: 120px;
-            height: 120px;
+        img {
+          width: 120px;
+          height: 120px;
+        }
+        p:nth-of-type(1) {
+          font-size: 12px;
+          font-weight: bold;
+          padding-left: 8px;
+          padding-right: 8px;
+          text-align: left;
+          margin-top: 4px;
+          padding-bottom: 6px;
+        }
+        p:nth-of-type(2) {
+          padding-left: 8px;
+          padding-right: 8px;
+          text-align: left;
+          span:nth-child(1) {
+            color: #cc2825;
           }
-          p:nth-of-type(1) {
-            font-size: 12px;
-            font-weight: bold;
-            padding-left: 8px;
-            padding-right: 8px;
-            text-align: left;
-            margin-top: 4px;
-            padding-bottom: 6px;
-          }
-          p:nth-of-type(2) {
-            padding-left: 8px;
-            padding-right: 8px;
-            text-align: left;
-            span:nth-child(1) {
-              color: #cc2825;
-            }
-            span:nth-child(2) {
-              color: #999999;
-            }
+          span:nth-child(2) {
+            color: #999999;
           }
         }
       }
