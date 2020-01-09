@@ -11,6 +11,7 @@ export default new Vuex.Store({
     City: "上海",
     // vuex怕刷新，在初始化时，将localStorage中数据取回来
     cartList: Store.get("cartList") || [],
+    // userInfo: Cookie.get("userInfo") ? JSON.parse(Cookie.get("userInfo")) : {}
     userInfo: {}
   },
   mutations: {
@@ -36,6 +37,9 @@ export default new Vuex.Store({
       }
       // 将购物车数据放在localStorage中，同时key是cartList
       Store.set("cartList", state.cartList);
+    },
+    saveUserInfo(state, payload) {
+      state.userInfo = payload;
     }
   },
   actions: {},

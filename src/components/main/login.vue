@@ -66,6 +66,9 @@
 </template>
 
 <script>
+// 存入用户数据登录数据，一般用cookie存储，在打包app中hbuilder中不能使用cookie，这里使用localStorage
+// import Cookie from "js-cookie";
+import Store from "store";
 export default {
   data() {
     return {
@@ -83,7 +86,24 @@ export default {
       this.$eventBus.$emit("showLogin", false);
     },
     login() {
+      // 这里应该接收客户输入的信息后端增加新用户信息，或者查找信息，返回的数据，这里先写死
+      var userInfo = {
+        name: "crazyli008",
+        iphone: "13027009926",
+        ImgUrl: "https://res.bestcake.com/m-images/order/mw-person-tx.png",
+        uname: "疯子里",
+        upwd: "123456"
+      };
+      // 得到的数据存在localStorage中，或者cookie中
+      Store.set("userInfo", userInfo);
+      // Cookie.set("userInfo", userInfo, { expires: 7 });
+      // 同时在vuex中存储
+      this.$store.commit("saveUserInfo", userInfo);
+      // 有了数据再让遮罩撤去
       this.$eventBus.$emit("showLogin", false);
+      this.$router.push({
+        path: "/my"
+      });
     }
   }
 };

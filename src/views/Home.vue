@@ -3,7 +3,7 @@
     <div class="footer">
       <!-- 添加动画  进入动画类名和退出动画的类名固定写法，对应的值在https://daneden.github.io/animate.css/找-->
       <transition
-        enter-active-class="fadeInRight"
+        enter-active-class="slideInRight"
         leave-active-class="bounceOutRight"
       >
         <!-- class animated 固定写法，因为你引入了animate -->

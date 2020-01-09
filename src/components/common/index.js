@@ -10,6 +10,8 @@ import Swiper from "./swiper";
 import { NoticeBar } from "vant";
 // 引入标签栏
 import { Tab, Tabs } from "vant";
+// 引入Collapse 折叠面板
+import { Collapse, CollapseItem } from "vant";
 export default function(Vue) {
   // 底部导航条组件
   Vue.use(Tabbar).use(TabbarItem);
@@ -23,4 +25,6 @@ export default function(Vue) {
   Vue.use(NoticeBar);
   // 将标签栏注册全局
   Vue.use(Tab).use(Tabs);
+  // 将Collapse 折叠面板注册全局
+  Vue.use(Collapse).use(CollapseItem);
 }

@@ -69,7 +69,7 @@
         <span>合计:</span>
         <span>{{ allPrice + ".00" }}</span>
       </div>
-      <div class="gocount">结算</div>
+      <div class="gocount" @click="tocount">结算</div>
     </div>
   </div>
 </template>
@@ -130,6 +130,15 @@ export default {
       });
       // 只要改变购物车的数据，就在localStorage更新一波
       Store.set("cartList", this.$store.state.cartList);
+    },
+    // 结算如何判断localStorage中登录状态
+    tocount() {
+      // 去结算，判断用户登录状态，如果没有登录，遮罩显示先登录，登录后在撤销遮罩
+      // if (Store.get("userInfo")) {
+      // this.$eventBus.$emit("showLogin", false);
+      // } else {
+      this.$eventBus.$emit("showLogin", true);
+      // }
     }
   },
   watch: {
