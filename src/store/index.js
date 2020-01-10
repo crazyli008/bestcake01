@@ -35,6 +35,7 @@ export default new Vuex.Store({
       if (bool) {
         state.cartList.push(data);
       }
+      console.log(this.state.cartList);
       // 将购物车数据放在localStorage中，同时key是cartList
       Store.set("cartList", state.cartList);
     },

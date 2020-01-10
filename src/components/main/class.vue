@@ -99,6 +99,10 @@ export default {
       });
       this.selectTab(true); //为了让刷新页面默认选择自营，在生命周期中初始化一波
     });
+    // 解决路由跳转不在头部问题！！
+    this.$router.afterEach(() => {
+      window.scrollTo(0, 0);
+    });
   },
   methods: {
     selectTab(bool) {
@@ -144,6 +148,7 @@ export default {
       });
     },
     add(item) {
+      // console.log(item);
       var temp = {
         id: item.ID,
         ImgUrl: item.ImgUrl,
@@ -151,8 +156,11 @@ export default {
         CurrentPrice: item.CurrentPrice,
         num: 1,
         Name: item.Name,
-        bool: true
+        bool: true,
+        // 传入货号，为了让购物车点击图片触发跳转到show页面的方法
+        SupplyNo: item.SupplyNo
       };
+      console.log(temp);
       Toast.success(item.Name + "\n" + "已加入购物车");
       // 测试数据是否拿到
       // console.log(temp);

@@ -267,6 +267,7 @@ export default {
       // 加入购物车逻辑
       // 测试选中后，当前的数据，是否发生变化
       // console.log(this.currentdata);
+      console.log(this.goodInfo);
       var temp = {
         // id需要做一个兼容，因为，女神和乳品的id是currentdata.ID，经典和伴手礼是currentdata.Id
         id: this.currentdata.ID || this.currentdata.Id,
@@ -281,7 +282,9 @@ export default {
         // 对应的名字
         Name: this.goodInfo.Name,
         // 数据中加上bool值，为了在购物车中做全选和不全选的操作，默认都是被选中状态
-        bool: true
+        bool: true,
+        // 数据中加入货号，用于购物车点击图片根据货号跳转路由
+        SupplyNo: this.goodInfo.SupplyNo
       };
       Dialog.confirm({
         title: "提示",

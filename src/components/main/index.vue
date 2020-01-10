@@ -134,6 +134,10 @@ export default {
       });
       this.SaleList = SaleList;
     });
+    // 解决路由传参跳转不在头部问题！！
+    this.$router.afterEach(() => {
+      window.scrollTo(0, 0);
+    });
   },
   methods: {
     setImgUrl(item) {

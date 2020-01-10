@@ -48,8 +48,16 @@ export default {
     };
   },
   beforeMount() {
+    // 测试
     // console.log(this.$store.state.userInfo);
     // if (_.isEmpty(this.$store.state.userInfo)) {
+    //   this.$eventBus.$emit("showLogin", true);
+    // }
+    // cookie该用cookie存储数据，因为打包的不能存储cookie，只能用localStorage
+    //   if (Cookie.get("userInfo")) {
+    //   var userInfo = JSON.parse(Cookie.get("userInfo"));
+    //   this.$store.commit("saveUserData", userInfo);
+    // } else {
     //   this.$eventBus.$emit("showLogin", true);
     // }
     if (Store.get("userInfo")) {
